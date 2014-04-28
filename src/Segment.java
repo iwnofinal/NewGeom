@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Arrays;
 
 /**
@@ -161,5 +162,28 @@ final public class Segment extends Dimension {
         int result = from.hashCode() * 31;
         result += to.hashCode();
         return result;
+    }
+
+    /**
+     * Method to draw 2D-segment
+     * @param g graphics instance
+     * @param color color of the segment
+     * @param thickness thickness of the segment
+     * @return sucess of the drawing
+     */
+    public boolean draw2D(Graphics g, Color color, int thickness) {
+        if (getDimension() != 2) {
+            throw new IllegalStateException(
+                    "The segment is not 2-dimensional!"
+            );
+        }
+        Color colorInit = g.getColor();
+        g.setColor(color);
+        Stroke strokeInit = ((Graphics2D) g).getStroke();
+        ((Graphics2D) g).setStroke(new BasicStroke(thickness));
+        g.drawLine((int)from.getX(), (int)from.getY(), (int)to.getX(), (int)to.getY());
+        ((Graphics2D) g).setStroke(strokeInit);
+        g.setColor(colorInit);
+        return true;
     }
 }

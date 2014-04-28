@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * Immutable class of geometric point.
  */
@@ -252,5 +254,25 @@ final public class Point extends GeomObject {
             }
         }
         return 0;
+    }
+
+    /**
+     * Method to draw 2-dimensional point
+     * @param g graphics instance
+     * @param color color of the point
+     * @param size size of the point (number of pixels)
+     * @return success of the drawing
+     */
+    public boolean draw2D(Graphics g, Color color, int size) {
+        if (getDimension() != 2) {
+            throw new IllegalStateException(
+                    "Point is not 2-dimensional!"
+            );
+        }
+        Color colorInit = g.getColor();
+        g.setColor(color);
+        g.fillOval((int)getX() - size / 2, (int)getY() - size / 2, size, size);
+        g.setColor(colorInit);
+        return true;
     }
 }
